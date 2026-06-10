@@ -84,7 +84,7 @@ public class VehicleManagement {
         System.out.print("\n");
     }
 
-    public void deleteVehicle(int id){
+    public void deleteVehicle(int id) throws VehicleNotFoundException{
         if (getVehicle(id)){
             int pos = getVehiclePos(id);
 
@@ -96,7 +96,7 @@ public class VehicleManagement {
             this.emergencyVehicles[this.vehicleCount] = null;
 
         } else {
-            System.out.println("This vehicle is not in the list");
+            throw new VehicleNotFoundException("Erro: This vehicle is not available.");
         }
     }
 
@@ -125,14 +125,14 @@ public class VehicleManagement {
         }
     }
 
-    public void updateAmbulance(int id, String manufacturer, LocalDate incorporationDate, double maxSpeed, LocalDate lastInspection, LocalDate nextInspection, double weight, boolean isOparicional){
+    public void updateAmbulance(int id, String manufacturer, LocalDate incorporationDate, double maxSpeed, LocalDate lastInspection, LocalDate nextInspection, double weight, boolean isOparicional) throws VehicleNotFoundException{
         if (getVehicle(id)){
             EmergencyVehicle vehicle = this.emergencyVehicles[getVehiclePos(id)];
 
             updateForAll(vehicle, manufacturer, incorporationDate, maxSpeed, lastInspection, nextInspection, weight, isOparicional);
 
         } else {
-            System.out.println("This vehicle is not in the list");
+            throw new VehicleNotFoundException("Erro: This vehicle is not available.");
         }
     }
 
@@ -162,6 +162,17 @@ public class VehicleManagement {
         };
     };
 
+    public void updateMedicalHelicopter(int id, String manufacturer, LocalDate incorporationDate, double maxSpeed, LocalDate lastInspection, LocalDate nextInspection, double weight, boolean isOparicional) throws VehicleNotFoundException{
+        if (getVehicle(id)){
+            EmergencyVehicle vehicle = this.emergencyVehicles[getVehiclePos(id)];
+
+            updateForAll(vehicle, manufacturer, incorporationDate, maxSpeed, lastInspection, nextInspection, weight, isOparicional);
+
+        } else {
+            throw new VehicleNotFoundException("Erro: This vehicle is not available.");
+        }
+    }
+
 
     /**
      * Rapid response car
@@ -186,4 +197,15 @@ public class VehicleManagement {
             };
         };
     };
+
+    public void updateRapidResponseCars(int id, String manufacturer, LocalDate incorporationDate, double maxSpeed, LocalDate lastInspection, LocalDate nextInspection, double weight, boolean isOparicional) throws VehicleNotFoundException{
+        if (getVehicle(id)){
+            EmergencyVehicle vehicle = this.emergencyVehicles[getVehiclePos(id)];
+
+            updateForAll(vehicle, manufacturer, incorporationDate, maxSpeed, lastInspection, nextInspection, weight, isOparicional);
+
+        } else {
+            throw new VehicleNotFoundException("Erro: This vehicle is not available.");
+        }
+    }
 }
