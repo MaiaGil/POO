@@ -1,3 +1,4 @@
+package Vehicles;
 public enum VehicleType {
     AMBULANCE, MEDICAL_HELICOPTER, RAPID_RESPONSE_CAR;
 }

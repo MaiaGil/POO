@@ -1,9 +1,10 @@
+package Vehicles;
 import java.time.LocalDate;
 
-public class Ambulance extends EmergencyVehicle {
+public class RapidResponseCar extends EmergencyVehicle{
 
-    public Ambulance(int id, String manufacturer, LocalDate incorporationDate, double maxSpeed, LocalDate lastInspection, LocalDate nextInspection, double weight, boolean isOparicional) {
-        super(id, manufacturer, incorporationDate, maxSpeed, lastInspection, nextInspection, weight, isOparicional, VehicleType.AMBULANCE);
+    public RapidResponseCar(int id, String manufacturer, LocalDate incorporationDate, double maxSpeed, LocalDate lastInspection, LocalDate nextInspection, double weight, boolean isOparicional) {
+        super(id, manufacturer, incorporationDate, maxSpeed, lastInspection, nextInspection, weight, isOparicional, VehicleType.RAPID_RESPONSE_CAR);
     }
 
     @Override
@@ -78,6 +79,5 @@ public class Ambulance extends EmergencyVehicle {
 
     
 
-    
     
 }
