@@ -18,6 +18,16 @@ public class VehicleManagement {
      * Funções gerais
      */
 
+    private void createForAll(EmergencyVehicle vehicle){
+        if (this.emergencyVehicles.length == this.vehicleCount){
+            maxVehicles();
+        }
+        
+        this.emergencyVehicles[this.vehicleCount] = vehicle; 
+        this.vehicleCount++;
+        this.idVehicle++;
+    }
+
     private void maxVehicles(){
         EmergencyVehicle[] temp = new EmergencyVehicle[this.emergencyVehicles.length + this.incrementVehicles]; 
 
@@ -101,7 +111,6 @@ public class VehicleManagement {
         }
     }
 
-
     /*
     * Ambulance
     */
@@ -109,13 +118,7 @@ public class VehicleManagement {
     public void createAmbulance(String manufacturer, LocalDate incorporationDate, double maxSpeed, LocalDate lastInspection, LocalDate nextInspection, double weight, boolean isOparicional){
         Ambulance ambulance = new Ambulance(this.idVehicle, manufacturer, incorporationDate, maxSpeed, lastInspection, nextInspection, weight, isOparicional);
 
-        if (this.emergencyVehicles.length == this.vehicleCount){
-            maxVehicles();
-        }
-        
-        this.emergencyVehicles[this.vehicleCount] = ambulance; 
-        this.vehicleCount++;
-        this.idVehicle++;
+        createForAll(ambulance);
     }
 
     public void readAmbulances(){
@@ -145,14 +148,7 @@ public class VehicleManagement {
     public void createMedicalHelicopter(String manufacturer, LocalDate incorporationDate, double maxSpeed, LocalDate lastInspection, LocalDate nextInspection, double weight, boolean isOparicional){
         MedicalHelicopter helicopter = new MedicalHelicopter(this.idVehicle, manufacturer, incorporationDate, maxSpeed, lastInspection, nextInspection, weight, isOparicional);
 
-        if (this.emergencyVehicles.length == this.vehicleCount){
-            maxVehicles();
-        }
-        
-        this.emergencyVehicles[this.vehicleCount] = helicopter; 
-        this.vehicleCount++;
-        this.idVehicle++;
-
+        createForAll(helicopter);
     };
 
     public void readMedicalHelicopters(){
@@ -182,13 +178,7 @@ public class VehicleManagement {
     public void createRapidResponseCar(String manufacturer, LocalDate incorporationDate, double maxSpeed, LocalDate lastInspection, LocalDate nextInspection, double weight, boolean isOparicional){
         RapidResponseCar rapidResponseCar = new RapidResponseCar(this.idVehicle, manufacturer, incorporationDate, maxSpeed, lastInspection, nextInspection, weight, isOparicional);
 
-        if (this.emergencyVehicles.length == this.vehicleCount){
-            maxVehicles();
-        }
-        
-        this.emergencyVehicles[this.vehicleCount] = rapidResponseCar; 
-        this.vehicleCount++;
-        this.idVehicle++;
+        createForAll(rapidResponseCar);
     };
 
     public void readRapidResponseCars(){
