@@ -1,5 +1,6 @@
 package MedicalTeam;
-import MedicalTeam.Exceptions.*;
+import MedicalTeam.Exceptions.TeamMemberNotFoundException;
+import MedicalTeam.Exceptions.TeamNeedsDoctorException;
 
 public class MedicalTeam {
     private TeamMember[] teamMembers;
@@ -51,6 +52,19 @@ public class MedicalTeam {
 
         } else {
             throw new Exception("Team is full");
+        }
+    }
+
+    public void readTeamMembers() throws Exception{
+        if (this.teamMemberCount != 0){
+            for (int i = 0; i < this.teamMemberCount; i++) {
+                System.out.print(teamMembers[i].getId());
+                System.out.print(teamMembers[i].getName());
+                System.out.print(teamMembers[i].getAge());
+                System.out.print("Is doctor: " + teamMembers[i].getId() + "\n");
+            }
+        } else {
+            throw new Exception("There are no team members in this team");
         }
     }
 
