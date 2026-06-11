@@ -1,4 +1,4 @@
-package EmergencyMission;
+package EmergencyMission.Interface;
 
 public interface EmergencyMission {
     int getDurationMinutes();

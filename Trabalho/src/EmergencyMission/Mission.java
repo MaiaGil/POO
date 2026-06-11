@@ -1,11 +1,10 @@
 package EmergencyMission;
-
-/**
- * Imports usados por o enunciado pedir horas
- */
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+import EmergencyMission.Enums.ContextType;
+import EmergencyMission.Enums.EmergencyType;
+import EmergencyMission.Interface.EmergencyMission;
 import MedicalTeam.MedicalTeam;
 import MedicalTeam.TeamMember;
 import Vehicles.EmergencyVehicle;
@@ -55,11 +54,11 @@ public class Mission implements EmergencyMission{
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public LocalDateTime getStartDate() {
-        return startDate;
+        return this.startDate;
     }
 
     public void setStartDate(LocalDateTime startDate) {
@@ -67,7 +66,7 @@ public class Mission implements EmergencyMission{
     }
 
     public LocalDateTime getEndDate() {
-        return endDate;
+        return this.endDate;
     }
 
     public void setEndDate(LocalDateTime endDate) {
@@ -75,7 +74,7 @@ public class Mission implements EmergencyMission{
     }
 
     public EmergencyType getEmergencyType() {
-        return emergencyType;
+        return this.emergencyType;
     }
 
     public void setEmergencyType(EmergencyType emergencyType) {
@@ -83,7 +82,7 @@ public class Mission implements EmergencyMission{
     }
 
     public ContextType getContextType() {
-        return contextType;
+        return this.contextType;
     }
 
     public void setContextType(ContextType contextType) {
@@ -91,7 +90,7 @@ public class Mission implements EmergencyMission{
     }
 
     public EmergencyVehicle getVehicle() {
-        return vehicle;
+        return this.vehicle;
     }
 
     public void setVehicle(EmergencyVehicle vehicle) {
@@ -99,7 +98,7 @@ public class Mission implements EmergencyMission{
     }
 
     public MedicalTeam getTeam() {
-        return team;
+        return this.team;
     }
 
     public void setTeam(MedicalTeam team) {
@@ -107,7 +106,7 @@ public class Mission implements EmergencyMission{
     }
 
     public TeamMember getResponsible() {
-        return responsible;
+        return this.responsible;
     }
 
     public void setResponsible(TeamMember responsible) {
