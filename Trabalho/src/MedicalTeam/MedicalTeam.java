@@ -15,6 +15,14 @@ public class MedicalTeam {
         this.numberDoctors = 0;
     }
 
+    public TeamMember[] getTeamMembers(){
+        TeamMember[] allTeamMembers = new TeamMember[this.teamMemberCount];
+        for ( int i = 0; i < this.teamMemberCount; i++){
+            allTeamMembers[i] = this.teamMembers[i];
+        }
+        return allTeamMembers;
+    }
+
     private boolean getTeamMember(int id){
         for (int i = 0; i < this.teamMemberCount; i++) {
             if (this.teamMembers[i].getId() == id){

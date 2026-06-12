@@ -1,7 +1,13 @@
 package EmergencyMission;
 
-import EmergencyMission.Interface.EmergencyMission;
+import java.time.LocalDateTime;
+
+import EmergencyMission.Enums.ContextType;
+import EmergencyMission.Enums.EmergencyType;
 import EmergencyMission.Interface.MissionLoggable;
+import MedicalTeam.MedicalTeam;
+import MedicalTeam.TeamMember;
+import Vehicles.EmergencyVehicle;
 
 public class MissionsManagement implements MissionLoggable{
 
@@ -17,24 +23,65 @@ public class MissionsManagement implements MissionLoggable{
     }
     
     @Override
-    public EmergencyMission[] getMissions() {
-        return null;
+    public Mission[] getMissions() {
+        Mission[] allMissions = new Mission[this.missionCount];
+        for(int i = 0; i < this.missionCount; i++) {
+            allMissions[i] = this.missions[i];
+        }
+        return allMissions;
+    }
+
+    private void maxMission(){
+        Mission[] temp = new Mission[this.missionCount + this.incrementMissions];
+            for (int i = 0; i < this.missionCount; i++) {
+                temp[i] = this.missions[i];
+            }
+        this.missions = temp;
     }
 
     @Override
     public void addMission(Mission var1) {
 
         if (this.missionCount == missions.length){
-            Mission[] temp = new Mission[this.missionCount + this.incrementMissions];
-            for (int i = 0; i < this.missionCount; i++) {
-                temp[i] = this.missions[i];
-            }
-            this.missions = temp;
+            maxMission();
         }
 
         this.missions[this.missionCount] = var1;
         this.missionCount++;
         this.missionId++;
+    }
+
+    public void createMission(LocalDateTime startDate, LocalDateTime endDate, EmergencyType emergencyType, ContextType contextType, String description, EmergencyVehicle emergencyVehicle, MedicalTeam medicalTeam, TeamMember responsible){
+        
+        if (!responsible.isDoctor()) {
+            // o responsavel tem de ser um médico
+        }
+
+        boolean responsibleHere = false;
+
+        for (int i = 0; i < medicalTeam.getTeamMembers().length; i++) {
+            if (medicalTeam.getTeamMembers()[i] == responsible){
+                responsibleHere = true;
+            }
+        }
+
+        if ( !responsibleHere ) {
+            // O responsavel tem de ser da equipa medica
+        }
+
+        if ( startDate.isAfter(endDate)){
+            // A data de inicio não pode ser depois da data de fim
+        }
+
+        Mission mission = new Mission(this.missionId, startDate, endDate, emergencyType, contextType, description, emergencyVehicle, medicalTeam, responsible);
+
+        if (this.missionCount == missions.length){
+            maxMission();
+        }
+
+        this.missions[this.missionCount] = mission;
+        this.missionId++;
+        this.missionCount++;
     }
 
     public void readMissions(){

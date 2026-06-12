@@ -14,6 +14,14 @@ public class VehicleManagement {
         this.idVehicle = 0;
     }
 
+    public EmergencyVehicle[] getEmergencyVehicles(){
+        EmergencyVehicle[] vehicles = new EmergencyVehicle[this.vehicleCount];
+        for (int i = 0; i < this.vehicleCount; i++) {
+            vehicles[i] = this.emergencyVehicles[i];
+        }
+        return vehicles;
+    }
+
     /**
      * Funções gerais
      */
