@@ -4,13 +4,13 @@ public class TeamMember {
     private final int id;
     private String name;
     private int age;
-    private boolean isDoctor;
+    private String job;
 
-    public TeamMember(int id, String name, int age, boolean isDoctor) {
+    public TeamMember(int id, String name, int age, String job) {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.isDoctor = isDoctor; 
+        this.job = job; 
     }
 
     public String getName() {
@@ -21,8 +21,8 @@ public class TeamMember {
         return age;
     }
 
-    public boolean isDoctor() {
-        return isDoctor;
+    public String getJob() {
+        return this.job;
     }
 
     public int getId() {
@@ -37,8 +37,8 @@ public class TeamMember {
         this.age = age;
     }
 
-    public void setDoctor(boolean isDoctor) {
-        this.isDoctor = isDoctor;
+    public void setJob(String job) {
+        this.job = job;
     }
     
 }

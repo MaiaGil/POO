@@ -7,12 +7,14 @@ public class MedicalTeam {
     private int teamMemberCount;
     private int teamMemberId;
     private int numberDoctors;
+    private boolean hasResponsible;
 
     public MedicalTeam(int numberTeamMembers) {
         this.teamMembers = new TeamMember[numberTeamMembers];
         this.teamMemberCount = 0;
         this.teamMemberId = 0;
         this.numberDoctors = 0;
+        this.hasResponsible = false;
     }
 
     public TeamMember[] getTeamMembers(){
@@ -41,22 +43,45 @@ public class MedicalTeam {
         return -1;
     }
 
-    public void addTeamMember(String name, int age, boolean isDoctor) throws TeamNeedsDoctorException, Exception{
+    public void addTeamMember(String name, int age, String job) throws TeamNeedsDoctorException, Exception{
         if (this.teamMemberCount != this.teamMembers.length){
 
-            if (this.teamMemberCount == this.teamMembers.length - 1 && this.numberDoctors == 0 && !isDoctor){
+            if (this.teamMemberCount == this.teamMembers.length - 1 && this.numberDoctors == 0){
                 throw new TeamNeedsDoctorException();
             }
             
-            TeamMember teamMember = new TeamMember(this.teamMemberId, name, age, isDoctor);
+            TeamMember teamMember = new TeamMember(this.teamMemberId, name, age, job);
             
-            teamMembers[this.teamMemberCount] = teamMember;
-
-            if (isDoctor){
-                numberDoctors++;
-            }
+            this.teamMembers[this.teamMemberCount] = teamMember;
             this.teamMemberCount++;
             this.teamMemberId++;
+
+        } else {
+            throw new Exception("Team is full");
+        }
+    }
+
+    public void addDoctor(String name, int age, String job, boolean isResponsible) throws Exception{
+        if (this.teamMemberCount != this.teamMembers.length){
+
+            if (this.teamMemberCount == this.teamMembers.length - 1 && this.numberDoctors == 0 && !isResponsible){
+                isResponsible = true;
+            };
+
+            if (isResponsible ) {
+                if (!this.hasResponsible){
+                    this.hasResponsible = true;
+                } else {
+                    //exception The team can not have 2 responsible
+                }
+            };
+            
+            Doctor doctor = new Doctor(this.teamMemberId, name, age, isResponsible);
+            
+            this.teamMembers[this.teamMemberCount] = doctor;
+            this.teamMemberCount++;
+            this.teamMemberId++;
+            this.numberDoctors++;
 
         } else {
             throw new Exception("Team is full");
@@ -66,10 +91,10 @@ public class MedicalTeam {
     public void readTeamMembers() throws Exception{
         if (this.teamMemberCount != 0){
             for (int i = 0; i < this.teamMemberCount; i++) {
-                System.out.print(teamMembers[i].getId());
-                System.out.print(teamMembers[i].getName());
-                System.out.print(teamMembers[i].getAge());
-                System.out.print("Is doctor: " + teamMembers[i].getId() + "\n");
+                System.out.print(this.teamMembers[i].getId());
+                System.out.print(this.teamMembers[i].getName());
+                System.out.print(this.teamMembers[i].getAge());
+                System.out.print(this.teamMembers[i].getJob());
             }
         } else {
             throw new Exception("There are no team members in this team");
@@ -79,7 +104,7 @@ public class MedicalTeam {
     public void updateTeamMember(int id, String name, int age) throws TeamMemberNotFoundException{
         if (getTeamMember(id)) {
 
-            TeamMember member = teamMembers[getTeamMemberPos(id)]; 
+            TeamMember member = this.teamMembers[getTeamMemberPos(id)]; 
 
             if (name != null && !name.trim().isEmpty()){
                 member.setName(name);
@@ -99,11 +124,18 @@ public class MedicalTeam {
 
             TeamMember member = teamMembers[pos]; 
 
-            if (member.isDoctor()){
-                if (numberDoctors == 1){
+            // Lembrar do instanceof, pois é usado por um array pais para saber o tipo de filho
+            if (member instanceof Doctor) {
+                Doctor doc = (Doctor) member;
+
+                if (this.numberDoctors == 1) {
                     throw new TeamNeedsDoctorException();
                 } else {
-                    numberDoctors--;
+                    if (doc.isResponsible()) {
+                        this.hasResponsible = false; 
+                    }
+                    
+                    this.numberDoctors--;
                 }
             }
 
@@ -112,7 +144,7 @@ public class MedicalTeam {
             }
 
             this.teamMemberCount--;
-            this.teamMembers[teamMemberCount] = null;
+            this.teamMembers[this.teamMemberCount] = null;
 
         } else{
             throw new TeamMemberNotFoundException();

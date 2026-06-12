@@ -52,22 +52,6 @@ public class MissionsManagement implements MissionLoggable{
     }
 
     public void createMission(LocalDateTime startDate, LocalDateTime endDate, EmergencyType emergencyType, ContextType contextType, String description, EmergencyVehicle emergencyVehicle, MedicalTeam medicalTeam, TeamMember responsible){
-        
-        if (!responsible.isDoctor()) {
-            // o responsavel tem de ser um médico
-        }
-
-        boolean responsibleHere = false;
-
-        for (int i = 0; i < medicalTeam.getTeamMembers().length; i++) {
-            if (medicalTeam.getTeamMembers()[i] == responsible){
-                responsibleHere = true;
-            }
-        }
-
-        if ( !responsibleHere ) {
-            // O responsavel tem de ser da equipa medica
-        }
 
         if ( startDate.isAfter(endDate)){
             // A data de inicio não pode ser depois da data de fim
