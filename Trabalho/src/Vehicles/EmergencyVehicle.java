@@ -25,6 +25,25 @@ public abstract class EmergencyVehicle implements Serializable {
       this.type = type;
    }
 
+   @Override //Feito com AI
+    public boolean equals(Object obj) {
+        // 1. Otimização: Somos literalmente a mesma peça na memória?
+        if (this == obj) {
+            return true;
+        }
+        
+        // 2. Proteção: O objeto que me passaram está vazio ou é de uma classe diferente?
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        // 3. Cast: Como já sabemos que o 'obj' é um EmergencyVehicle, fazemos o Cast
+        EmergencyVehicle outroVeiculo = (EmergencyVehicle) obj;
+        
+        // 4. A Comparação Real: Dois veículos são iguais se tiverem o mesmo ID
+        return this.id == outroVeiculo.id;
+    }
+
    public String getManufacturer() {
       return this.manufacturer;
    }
