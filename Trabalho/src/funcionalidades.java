@@ -68,7 +68,9 @@ public class funcionalidades {
 
     public double getAverageEmergenciesByVehicleAndType(EmergencyType emergencyType, VehicleType vehicleType) throws Exception{
         Mission[] allMissions = missonM.getMissions();
+        Vehicle[] allVehicles = vehicleM.getVehicles();
         int countEmergencies = 0;
+        int countVehicles = 0;
 
         for (int i = 0; i < allMissions.length; i++) {
             if (allMissions[i].getEmergencyType() == emergencyType && allMissions[i].getVehicle().getType() == vehicleType){
@@ -76,12 +78,17 @@ public class funcionalidades {
             }
         }
 
-        if (countEmergencies <= 0){
-            throw new Exception("There are no missons for this type of emergency and vehicle");
+        for (int i = 0; i < allVehicles.length; i++) {
+            if (allVehicles[i].getType() == vehicleType) {
+                countVehicles++;
+            }
         }
 
-        double averageEmergencies = (double) countEmergencies / allMissions.length;
-        return averageEmergencies;
+        if (countVehicles == 0) {
+            throw new Exception("No vehicles of this type found.");
+        }
+
+        return (double) countEmergencies / countVehicles;
     }
 
     public void displayNationalInternationalEmergenciesVehicle(EmergencyVehicle vehicle){
